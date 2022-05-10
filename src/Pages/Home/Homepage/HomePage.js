@@ -1,9 +1,12 @@
 import React from "react";
+import Banner from "../Banner/Banner";
+import InfoCard from "../InfoCard/InfoCard";
 
 const HomePage = () => {
   return (
     <div>
-      <h3>This is from Home Page</h3>
+      <Banner></Banner>
+      <InfoCard></InfoCard>
     </div>
   );
 };
