@@ -6,6 +6,7 @@ import LogIn from "./Pages/Authentications/Login/LogIn";
 import Contact from "./Pages/Contact/Contact";
 import HomePage from "./Pages/Home/Homepage/HomePage";
 import Reviews from "./Pages/Reviews/Reviews";
+import Footer from "./Pages/Shared/Footer/Footer";
 import Header from "./Pages/Shared/Header/Header";
 import NotFound from "./Pages/Shared/NotFound/NotFound";
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/login" element={<LogIn></LogIn>}></Route>
         <Route path="/*" element={<NotFound></NotFound>}></Route>
       </Routes>
+      <Footer></Footer>
     </div>
   );
 }

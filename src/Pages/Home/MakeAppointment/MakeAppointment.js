@@ -12,8 +12,8 @@ const MakeAppointment = () => {
       <div className="flex-1 hidden lg:block mt-[-120px]">
         <img src={doctor} alt="" />
       </div>
-      <div class="card-body flex-1  ">
-        <h2 class="card-title text-[20px]  text-secondary ">Appointment</h2>
+      <div className="card-body flex-1  ">
+        <h2 className="card-title text-[20px]  text-secondary ">Appointment</h2>
         <h4 className="text-white text-[36px] font-semibold">
           Make an appointment Today
         </h4>
@@ -24,8 +24,8 @@ const MakeAppointment = () => {
           letters,as opposed to using 'Content here, content here', making it
           look like readable English. Many desktop publishing packages and web
           page
-          <div class="card-actions mt-[40px]">
-            <button class=" btn bg-gradient-to-r from-secondary to-primary border-0 uppercase font-bold text-white ">
+          <div className="card-actions mt-[40px]">
+            <button className=" btn bg-gradient-to-r from-secondary to-primary border-0 uppercase font-bold text-white ">
               Get Started
             </button>
           </div>
