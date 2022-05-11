@@ -12,7 +12,7 @@ import NotFound from "./Pages/Shared/NotFound/NotFound";
 
 function App() {
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       <Header></Header>
       <Routes>
         <Route path="/" element={<HomePage></HomePage>}></Route>
@@ -26,7 +26,6 @@ function App() {
         <Route path="/login" element={<LogIn></LogIn>}></Route>
         <Route path="/*" element={<NotFound></NotFound>}></Route>
       </Routes>
-      <Footer></Footer>
     </div>
   );
 }
