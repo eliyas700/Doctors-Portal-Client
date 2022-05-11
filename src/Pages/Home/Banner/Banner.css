@@ -1,0 +1,11 @@
+.banner {
+    background: url("../../../assets//images//bg.png") no-repeat;
+    background-position: left;
+    background-size: cover;
+}
+
+@media (max-width: 480px) {
+    .banner {
+        background: none;
+    }
+}

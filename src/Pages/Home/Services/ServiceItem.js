@@ -4,10 +4,10 @@ const ServiceItem = ({ img, title }) => {
   return (
     <div
       style={{ boxShadow: "3px 4px 10px 2px rgba(0, 0, 0, 0.05)" }}
-      className="card card-compact mx-auto w-96 bg-base-100 rounded-[18px] "
+      className="card card-compact mx-auto py-4 w-96 bg-base-100 rounded-[18px] "
     >
       <figure>
-        <img src={img} alt="Shoes" />
+        <img src={img} className="w-[110px] h-[116px]" alt="Shoes" />
       </figure>
       <div className="card-body text-center ">
         <h2 className="card-title mx-auto text-accent  ">{title}</h2>
