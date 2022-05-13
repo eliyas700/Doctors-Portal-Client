@@ -5,7 +5,7 @@ import {
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading/Loading";
 import SocialLogin from "./Login/SocialLogin/SocialLogin";
@@ -20,9 +20,11 @@ const Signup = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const navigate = useNavigate();
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name });
+    await navigate("/appointment");
   };
   if (loading || updating) {
     return <Loading></Loading>;
@@ -31,9 +33,7 @@ const Signup = () => {
   if (error) {
     errorMessage = <p>{error.message}</p>;
   }
-  if (user) {
-    console.log(user);
-  }
+
   return (
     <div>
       <div className="hero min-h-screen">

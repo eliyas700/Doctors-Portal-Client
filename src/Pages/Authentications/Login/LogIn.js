@@ -7,19 +7,19 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import Loading from "../../Shared/Loading/Loading";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 const LogIn = () => {
   const [signInWithEmailAndPassword, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => {
-    signInWithEmailAndPassword(data.email, data.password);
-  };
   if (loading) {
     return <Loading></Loading>;
   }
@@ -27,9 +27,14 @@ const LogIn = () => {
   if (error) {
     errorMessage = <p>{error.message}</p>;
   }
-  if (user) {
-    console.log(user, "User");
-  }
+  // if (user) {
+  //
+  // }
+  const onSubmit = async (data) => {
+    await signInWithEmailAndPassword(data.email, data.password);
+    await navigate(from, { replace: true });
+  };
+
   return (
     <div>
       <div className="hero min-h-screen">
