@@ -23,19 +23,18 @@ const Signup = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-
-  const onSubmit = async (data) => {
-    await createUserWithEmailAndPassword(data.email, data.password);
-    await updateProfile({ displayName: data.name });
-    await navigate(from, { replace: true });
-  };
   if (loading || updating) {
     return <Loading></Loading>;
   }
   let errorMessage;
-  if (error) {
-    errorMessage = <p>{error.message}</p>;
+  if (error || uperror) {
+    errorMessage = <p>{error?.message || uperror?.message}</p>;
   }
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
+    navigate(from, { replace: true });
+  };
 
   return (
     <div>
@@ -63,7 +62,7 @@ const Signup = () => {
                         placeholder="email"
                         className="input input-bordered "
                       />
-                      <label class="label">
+                      <label className="label">
                         {errors.name?.type === "required" && (
                           <span className="text-red-500 label-text-alt">
                             {errors.name.message}
@@ -92,7 +91,7 @@ const Signup = () => {
                         placeholder="email"
                         className="input input-bordered "
                       />
-                      <label class="label">
+                      <label className="label">
                         {errors.email?.type === "required" && (
                           <span className="text-red-500 label-text-alt">
                             {errors.email.message}
@@ -126,7 +125,7 @@ const Signup = () => {
                         placeholder="Password"
                         className="input input-bordered "
                       />
-                      <label class="label">
+                      <label className="label">
                         {errors.password?.type === "required" && (
                           <span className="text-red-500 label-text-alt">
                             {errors.password.message}

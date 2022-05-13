@@ -11,7 +11,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 const LogIn = () => {
   const [signInWithEmailAndPassword, loading, error] =
     useSignInWithEmailAndPassword(auth);
-  const [user] = useAuthState(auth);
+  const [user, userError] = useAuthState(auth);
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
@@ -20,13 +20,7 @@ const LogIn = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  if (loading) {
-    return <Loading></Loading>;
-  }
-  let errorMessage;
-  if (error) {
-    errorMessage = <p>{error.message}</p>;
-  }
+
   // if (user) {
   //
   // }
@@ -34,7 +28,13 @@ const LogIn = () => {
     await signInWithEmailAndPassword(data.email, data.password);
     await navigate(from, { replace: true });
   };
-
+  if (loading) {
+    return <Loading></Loading>;
+  }
+  let errorMessage;
+  if (userError || error) {
+    errorMessage = <p>{userError.message}</p>;
+  }
   return (
     <div>
       <div className="hero min-h-screen">
@@ -66,7 +66,7 @@ const LogIn = () => {
                         placeholder="email"
                         className="input input-bordered "
                       />
-                      <label class="label">
+                      <label className="label">
                         {errors.email?.type === "required" && (
                           <span className="text-red-500 label-text-alt">
                             {errors.email.message}
@@ -100,7 +100,7 @@ const LogIn = () => {
                         placeholder="Password"
                         className="input input-bordered "
                       />
-                      <label class="label">
+                      <label className="label">
                         {errors.password?.type === "required" && (
                           <span className="text-red-500 label-text-alt">
                             {errors.password.message}

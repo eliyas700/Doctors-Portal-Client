@@ -29,7 +29,6 @@ const Header = () => {
             className="btn btn-ghost flex items-center"
             onClick={() => {
               signOut(auth);
-              console.log("clicked");
             }}
           >
             {user?.displayName}
