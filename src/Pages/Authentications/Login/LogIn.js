@@ -1,13 +1,29 @@
 import React from "react";
 import SocialLogin from "./SocialLogin/SocialLogin";
 import { useForm } from "react-hook-form";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
+import Loading from "../../Shared/Loading/Loading";
 const LogIn = () => {
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    signInWithEmailAndPassword(data.email, data.password);
+  };
+  if (loading) {
+    return <Loading></Loading>;
+  }
+  let errorMessage;
+  if (error) {
+    errorMessage = <p>{error.message}</p>;
+  }
   return (
     <div>
       <div className="hero min-h-screen">
@@ -85,7 +101,7 @@ const LogIn = () => {
                           </span>
                         )}
                       </label>
-
+                      <small className="text-red-500">{errorMessage}</small>
                       <label className="label">
                         <a href="/" className="label-text-alt link link-hover">
                           Forgot password?
