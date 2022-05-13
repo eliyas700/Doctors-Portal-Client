@@ -5,7 +5,7 @@ import {
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading/Loading";
 import SocialLogin from "./Login/SocialLogin/SocialLogin";
@@ -14,17 +14,20 @@ const Signup = () => {
   const [createUserWithEmailAndPassword, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
   const [updateProfile, updating, uperror] = useUpdateProfile(auth);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name });
-    await navigate("/appointment");
+    await navigate(from, { replace: true });
   };
   if (loading || updating) {
     return <Loading></Loading>;
