@@ -1,26 +1,30 @@
 import React from "react";
-import SocialLogin from "./SocialLogin/SocialLogin";
-import { useForm } from "react-hook-form";
 import {
   useAuthState,
-  useSignInWithEmailAndPassword,
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
-import auth from "../../../firebase.init";
-import Loading from "../../Shared/Loading/Loading";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-const LogIn = () => {
-  const [signInWithEmailAndPassword, loading, error] =
-    useSignInWithEmailAndPassword(auth);
+import auth from "../../firebase.init";
+import Loading from "../Shared/Loading/Loading";
+import SocialLogin from "./Login/SocialLogin/SocialLogin";
+
+const Signup = () => {
+  const [createUserWithEmailAndPassword, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
   const [user] = useAuthState(auth);
+  const [updateProfile, updating, uperror] = useUpdateProfile(auth);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => {
-    signInWithEmailAndPassword(data.email, data.password);
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
   };
-  if (loading) {
+  if (loading || updating) {
     return <Loading></Loading>;
   }
   let errorMessage;
@@ -28,7 +32,7 @@ const LogIn = () => {
     errorMessage = <p>{error.message}</p>;
   }
   if (user) {
-    console.log(user, "User");
+    console.log(user);
   }
   return (
     <div>
@@ -38,8 +42,32 @@ const LogIn = () => {
             <div className="flex flex-col w-full border-opacity-50">
               <div className="grid card  rounded-box place-items-center">
                 <div className="card-body p-3 px-4 min-w-[327px] ">
-                  <h2 className="text-center text-xl font-sans my-0">Login</h2>
+                  <h2 className="text-center text-xl font-sans my-0">Signup</h2>
                   <form onSubmit={handleSubmit(onSubmit)}>
+                    {/* Name Field */}
+                    <div className="form-control">
+                      <label className="label">
+                        <span className="label-text">Name</span>
+                      </label>
+                      <input
+                        {...register("name", {
+                          required: {
+                            value: true,
+                            message: "Name is Required",
+                          },
+                        })}
+                        type="text"
+                        placeholder="email"
+                        className="input input-bordered "
+                      />
+                      <label class="label">
+                        {errors.name?.type === "required" && (
+                          <span className="text-red-500 label-text-alt">
+                            {errors.name.message}
+                          </span>
+                        )}
+                      </label>
+                    </div>
                     {/* Email Field */}
                     <div className="form-control">
                       <label className="label">
@@ -57,7 +85,7 @@ const LogIn = () => {
                             message: "You Must Provide a Valid Email",
                           },
                         })}
-                        type="text"
+                        type="email"
                         placeholder="email"
                         className="input input-bordered "
                       />
@@ -118,14 +146,14 @@ const LogIn = () => {
                       <input
                         className="btn btn-accent mt-0  uppercase text-[#D4D9E3]"
                         type="submit"
-                        value="Login"
+                        value="Sign up"
                       />
                     </div>
                   </form>
                   <p className="mt-2">
-                    New to Doctors Portal?{" "}
-                    <Link to="/signup" className="text-secondary">
-                      Create New Account
+                    Already Have an Account?{" "}
+                    <Link to="/login" className="text-secondary">
+                      Login Now
                     </Link>
                   </p>
                 </div>
@@ -139,4 +167,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default Signup;

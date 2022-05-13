@@ -6,8 +6,8 @@ import LogIn from "./Pages/Authentications/Login/LogIn";
 import Contact from "./Pages/Contact/Contact";
 import HomePage from "./Pages/Home/Homepage/HomePage";
 import Reviews from "./Pages/Reviews/Reviews";
-import Footer from "./Pages/Shared/Footer/Footer";
 import Header from "./Pages/Shared/Header/Header";
+import Signup from "./Pages/Authentications/Signup";
 import NotFound from "./Pages/Shared/NotFound/NotFound";
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
         <Route path="/reviews" element={<Reviews></Reviews>}></Route>
         <Route path="/contact" element={<Contact></Contact>}></Route>
         <Route path="/login" element={<LogIn></LogIn>}></Route>
+        <Route path="/signup" element={<Signup></Signup>}></Route>
         <Route path="/*" element={<NotFound></NotFound>}></Route>
       </Routes>
     </div>
