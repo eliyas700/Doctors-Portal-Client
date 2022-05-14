@@ -2,13 +2,34 @@ import React from "react";
 import { format } from "date-fns";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import { toast } from "react-toastify";
 const BookingModal = ({ treatment, date, setTreatment }) => {
   const { slots, name, _id } = treatment;
   const [user] = useAuthState(auth);
   const handleSubmit = (event) => {
+    console.log("clivkes");
     event.preventDefault();
     const slot = event.target.slot.value;
-    setTreatment(null);
+    const booking = {
+      treatmentId: _id,
+      treatment: name,
+      slot,
+      patient: user.email,
+      patientName: user.displayName,
+      phone: event.target.phone.value,
+    };
+
+    fetch("http://localhost:5000/booking", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(booking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast("Booking Successfull");
+        setTreatment(null);
+      });
   };
   return (
     <div>

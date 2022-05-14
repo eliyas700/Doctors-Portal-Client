@@ -21,9 +21,6 @@ const LogIn = () => {
     handleSubmit,
   } = useForm();
 
-  // if (user) {
-  //
-  // }
   const onSubmit = async (data) => {
     await signInWithEmailAndPassword(data.email, data.password);
     await navigate(from, { replace: true });
@@ -128,7 +125,7 @@ const LogIn = () => {
                     </div>
                   </form>
                   <p className="mt-2">
-                    New to Doctors Portal?{" "}
+                    New to Doctors Portal?
                     <Link to="/signup" className="text-secondary">
                       Create New Account
                     </Link>
