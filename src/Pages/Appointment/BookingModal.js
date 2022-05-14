@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 const BookingModal = ({ treatment, date, setTreatment }) => {
   const { slots, name, _id } = treatment;
   const [user] = useAuthState(auth);
+  const fomattedDate = format(date, "PP");
   const handleSubmit = (event) => {
     console.log("clivkes");
     event.preventDefault();
@@ -14,6 +15,7 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
       treatmentId: _id,
       treatment: name,
       slot,
+      date: fomattedDate,
       patient: user.email,
       patientName: user.displayName,
       phone: event.target.phone.value,
@@ -27,7 +29,13 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        toast("Booking Successfull");
+        if (data.success) {
+          toast(`Appointment is set, ${fomattedDate} at ${slot}`);
+        } else {
+          toast.error(
+            `You already have an appointment on, ${data.booking?.date} at ${data.booking?.slot}`
+          );
+        }
         setTreatment(null);
       });
   };
