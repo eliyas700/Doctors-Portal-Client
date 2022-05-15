@@ -37,7 +37,7 @@ const Signup = () => {
     );
   }
 
-  if (user) {
+  if (token) {
     navigate("/appointment");
   }
 

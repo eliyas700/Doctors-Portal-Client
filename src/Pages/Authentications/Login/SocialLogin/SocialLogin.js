@@ -11,7 +11,7 @@ const SocialLogin = () => {
   const location = useLocation();
   const [token] = useToken(user);
   let from = location.state?.from?.pathname || "/";
-  if (user) {
+  if (token) {
     navigate("/appointment");
     console.log(user, "Form user");
   }
