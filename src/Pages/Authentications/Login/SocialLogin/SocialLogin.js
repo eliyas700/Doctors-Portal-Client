@@ -2,14 +2,18 @@ import React from "react";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useNavigate, useLocation } from "react-router-dom";
 import auth from "../../../../firebase.init";
+import useToken from "../../../../Hooks/useToken";
 import Loading from "../../../Shared/Loading/Loading";
 const SocialLogin = () => {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+
   const navigate = useNavigate();
   const location = useLocation();
+  const [token] = useToken(user);
   let from = location.state?.from?.pathname || "/";
   if (user) {
     navigate("/appointment");
+    console.log(user, "Form user");
   }
   if (loading) {
     return <Loading></Loading>;
@@ -26,7 +30,6 @@ const SocialLogin = () => {
         <button
           onClick={async () => {
             await signInWithGoogle();
-            await navigate(from, { replace: true });
           }}
           className="btn font-normal hover:text-slate-100 text-accent uppercase bg-transparent w-full ]"
         >
