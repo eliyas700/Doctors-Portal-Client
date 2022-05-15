@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { toast } from "react-toastify";
-const BookingModal = ({ treatment, date, setTreatment }) => {
+const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
   const { slots, name, _id } = treatment;
   const [user] = useAuthState(auth);
   const fomattedDate = format(date, "PP");
@@ -36,6 +36,7 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
             `You already have an appointment on, ${data.booking?.date} at ${data.booking?.slot}`
           );
         }
+        refetch();
         setTreatment(null);
       });
   };
