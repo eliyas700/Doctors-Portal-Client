@@ -28,7 +28,7 @@ const SocialLogin = () => {
             await signInWithGoogle();
             await navigate(from, { replace: true });
           }}
-          className="btn font-normal hover:text-slate-100 text-accent uppercase bg-transparent min-w-[327px] ]"
+          className="btn font-normal hover:text-slate-100 text-accent uppercase bg-transparent w-full ]"
         >
           Continue With Google
         </button>
