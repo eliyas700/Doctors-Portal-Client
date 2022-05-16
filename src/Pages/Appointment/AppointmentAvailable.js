@@ -15,15 +15,15 @@ const AppointmentAvailable = ({ date }) => {
     data: services,
     refetch,
   } = useQuery(["available", fomattedDate], () =>
-    fetch(`http://localhost:5000/available?date=${fomattedDate}`).then((res) =>
-      res.json()
-    )
+    fetch(
+      `https://secret-coast-36592.herokuapp.com/available?date=${fomattedDate}`
+    ).then((res) => res.json())
   );
   if (isLoading) {
     return <Loading></Loading>;
   }
   // useEffect(() => {
-  //   fetch(`http://localhost:5000/available?date=${fomattedDate}`)
+  //   fetch(`https://secret-coast-36592.herokuapp.com/available?date=${fomattedDate}`)
   //     .then((res) => res.json())
   //     .then((data) => setServices(data));
   // }, [fomattedDate]);

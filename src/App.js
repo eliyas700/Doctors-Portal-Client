@@ -17,6 +17,7 @@ import MyAppointments from "./Pages/DashBoard/MyAppointments";
 import MyReviews from "./Pages/DashBoard/MyReviews";
 import Users from "./Pages/DashBoard/Users";
 import RequireAdmin from "./Pages/Authentications/RequireAdmin/RequireAdmin";
+import AddDoctor from "./Pages/DashBoard/AddDoctor";
 function App() {
   return (
     <div className="max-w-7xl mx-auto">
@@ -49,6 +50,14 @@ function App() {
             element={
               <RequireAdmin>
                 <Users></Users>
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route
+            path="addDoctor"
+            element={
+              <RequireAdmin>
+                <AddDoctor></AddDoctor>
               </RequireAdmin>
             }
           ></Route>
