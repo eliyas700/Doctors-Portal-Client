@@ -1,10 +1,13 @@
+import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 
 const MyAppointments = () => {
   const [appointments, setAppointments] = useState([]);
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
   useEffect(() => {
     if (user) {
       fetch(`http://localhost:5000/booking?patient=${user.email}`, {
@@ -13,13 +16,22 @@ const MyAppointments = () => {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       })
-        .then((res) => res.json())
+        .then((res) => {
+          console.log(res, "Response");
+          if (res.status === 401 || res.status === 403) {
+            signOut(auth);
+            localStorage.removeItem("accessToken");
+            //Home
+            navigate("/");
+          }
+          return res.json();
+        })
         .then((data) => setAppointments(data));
     }
   }, [user]);
   return (
     <div>
-      <h4>This is My Appointments :{appointments.length}</h4>
+      <h4>This is My Appointments :{appointments?.length}</h4>
       <div class="overflow-x-auto">
         <table class="table w-full">
           <thead>
