@@ -8,7 +8,6 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
   const [user] = useAuthState(auth);
   const fomattedDate = format(date, "PP");
   const handleSubmit = (event) => {
-    console.log("clivkes");
     event.preventDefault();
     const slot = event.target.slot.value;
     const booking = {
@@ -28,7 +27,6 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.success) {
           toast(`Appointment is set, ${fomattedDate} at ${slot}`);
         } else {

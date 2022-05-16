@@ -19,12 +19,12 @@ const Users = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
-  console.log(users);
+
   return (
     <div>
       <h4>This is From users section:{users.length} </h4>
-      <div class="overflow-x-auto">
-        <table class="table w-full">
+      <div className="overflow-x-auto">
+        <table className="table w-full">
           <thead>
             <tr>
               <th></th>

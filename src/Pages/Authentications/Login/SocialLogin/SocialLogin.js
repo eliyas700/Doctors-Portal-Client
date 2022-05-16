@@ -13,7 +13,6 @@ const SocialLogin = () => {
   let from = location.state?.from?.pathname || "/";
   if (token) {
     navigate("/appointment");
-    console.log(user, "Form user");
   }
   if (loading) {
     return <Loading></Loading>;

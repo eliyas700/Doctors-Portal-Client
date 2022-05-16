@@ -17,19 +17,21 @@ const MakeAppointment = () => {
         <h4 className="text-white text-[36px] font-semibold">
           Make an appointment Today
         </h4>
-        <p className=" mx-auto mt-[26px] mr-9 text-slate-200">
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout. The point of
-          using Lorem Ipsumis that it has a more-or-less normal distribution of
-          letters,as opposed to using 'Content here, content here', making it
-          look like readable English. Many desktop publishing packages and web
-          page
+        <div className=" mx-auto mt-[26px] mr-9 text-slate-200">
+          <p>
+            It is a long established fact that a reader will be distracted by
+            the readable content of a page when looking at its layout. The point
+            of using Lorem Ipsumis that it has a more-or-less normal
+            distribution of letters,as opposed to using 'Content here, content
+            here', making it look like readable English. Many desktop publishing
+            packages and web page
+          </p>
           <div className="card-actions mt-[40px]">
             <button className=" btn bg-gradient-to-r from-secondary to-primary border-0 uppercase font-bold text-white ">
               Get Started
             </button>
           </div>
-        </p>
+        </div>
       </div>
     </section>
   );
