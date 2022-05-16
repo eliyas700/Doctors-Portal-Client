@@ -34,6 +34,7 @@ const Header = () => {
             className="btn btn-ghost flex items-center"
             onClick={() => {
               signOut(auth);
+              localStorage.removeItem("accessToken");
             }}
           >
             {user?.displayName}
