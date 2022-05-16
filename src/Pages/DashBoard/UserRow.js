@@ -10,11 +10,17 @@ const UserRow = ({ user, index, refetch }) => {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 403) {
+          toast.error("Sorry! Failed to Promote as an Admin");
+        }
+        return res.json();
+      })
       .then((data) => {
-        console.log(data);
-        toast.success("Successfully Promoted as As An Admin ");
-        refetch();
+        if (data.modifiedCount > 0) {
+          toast.success("Successfully Promoted as As An Admin ");
+          refetch();
+        }
       });
   };
   return (
