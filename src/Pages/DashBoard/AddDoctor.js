@@ -14,8 +14,29 @@ const AddDoctor = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
+  const imageStorageKey = "fb945273156e5c66d0c7c83e4776688b";
   const onSubmit = async (data) => {
-    console.log("its data", data);
+    console.log(data, "Daatat");
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.success) {
+          const img = result.data.url;
+          const doctor = {
+            name: data.name,
+            email: data.email,
+            specialty: data.specialty,
+            img: img,
+          };
+        }
+      });
   };
   return (
     <div>
@@ -82,7 +103,10 @@ const AddDoctor = () => {
           <label className="label">
             <span className="label-text">Specialty</span>
           </label>
-          <select {...register("specialty")} class="select w-full max-w-xs">
+          <select
+            {...register("specialty")}
+            class="select w-full input-bordered max-w-xs"
+          >
             {services.map((service) => (
               <option key={service._id} value={service.name}>
                 {service.name}
@@ -91,7 +115,7 @@ const AddDoctor = () => {
           </select>
         </div>
         <div className="form-control w-full max-w-xs">
-          <label className="label">
+          <label className="label ">
             <span className="label-text">Photo</span>
           </label>
           <input
