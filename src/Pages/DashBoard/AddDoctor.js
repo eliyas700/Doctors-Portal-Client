@@ -20,7 +20,6 @@ const AddDoctor = () => {
   }
   const imageStorageKey = "fb945273156e5c66d0c7c83e4776688b";
   const onSubmit = async (data) => {
-    console.log(data, "Daatat");
     const image = data.image[0];
     const formData = new FormData();
     formData.append("image", image);
@@ -56,7 +55,6 @@ const AddDoctor = () => {
               } else {
                 toast.error("Failed To add the Doctor ,Try Again");
               }
-              console.log("Doctors Informations", inserted);
             });
         }
       });
@@ -128,7 +126,7 @@ const AddDoctor = () => {
           </label>
           <select
             {...register("specialty")}
-            class="select w-full input-bordered max-w-xs"
+            className="select w-full input-bordered max-w-xs"
           >
             {services.map((service) => (
               <option key={service._id} value={service.name}>

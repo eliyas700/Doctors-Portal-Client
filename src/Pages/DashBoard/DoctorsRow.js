@@ -6,8 +6,8 @@ const DoctorsRow = ({ doctor, index, refetch, setDeletingDoctor }) => {
     <tr>
       <th>{index + 1}</th>
       <td>
-        <div class="avatar">
-          <div class="w-10 rounded-full ">
+        <div className="avatar">
+          <div className="w-10 rounded-full ">
             <img src={doctor.img} alt={doctor.name} />
           </div>
         </div>
@@ -19,7 +19,7 @@ const DoctorsRow = ({ doctor, index, refetch, setDeletingDoctor }) => {
         <label
           onClick={() => setDeletingDoctor(doctor)}
           for="delete-doctor-modal"
-          class="btn  btn-xs btn-error modal-button"
+          className="btn  btn-xs btn-error modal-button"
         >
           Remove
         </label>
