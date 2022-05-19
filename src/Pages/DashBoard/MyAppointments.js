@@ -64,7 +64,19 @@ const MyAppointments = () => {
                     </Link>
                   )}
                   {a.price && a.paid && (
-                    <span className="text-success">Paid</span>
+                    <div>
+                      <p>
+                        <span className="text-success">Paid</span>
+                      </p>
+                      <p>
+                        <small>
+                          Trans id:
+                          <span className="text-success">
+                            {a.transactionId}
+                          </span>
+                        </small>
+                      </p>
+                    </div>
                   )}
                 </td>
               </tr>
