@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 const DeleteDoctor = ({ doctor, refetch, setDeletingDoctor }) => {
   const handleDelete = (email) => {
-    fetch(`http://localhost:5000/doctors/${email}`, {
+    fetch(`https://secret-coast-36592.herokuapp.com/doctors/${email}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

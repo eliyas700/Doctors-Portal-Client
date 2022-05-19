@@ -11,7 +11,9 @@ const AddDoctor = () => {
     reset,
   } = useForm();
   const { data: services, isLoading } = useQuery("services", () =>
-    fetch("http://localhost:5000/service").then((res) => res.json())
+    fetch("https://secret-coast-36592.herokuapp.com/service").then((res) =>
+      res.json()
+    )
   );
   if (isLoading) {
     return <Loading></Loading>;
@@ -38,7 +40,7 @@ const AddDoctor = () => {
             img: img,
           };
           //Send Doctor Info To DataBase
-          fetch("http://localhost:5000/doctors", {
+          fetch("https://secret-coast-36592.herokuapp.com/doctors", {
             method: "POST",
             headers: {
               "content-type": "application/json",
