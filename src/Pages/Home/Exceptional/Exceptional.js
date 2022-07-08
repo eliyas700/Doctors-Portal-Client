@@ -1,5 +1,6 @@
 import React from "react";
 import treatment from "../../../assets/images/treatment.png";
+import { Link } from "react-router-dom";
 const Exceptional = () => {
   return (
     <div className="card lg:card-side ">
@@ -24,9 +25,12 @@ const Exceptional = () => {
             packages and web page
           </p>
           <div className="card-actions mt-[40px]">
-            <button className=" btn bg-gradient-to-r from-secondary to-primary border-0 uppercase font-bold text-white ">
+            <Link
+              to="/appointment"
+              className=" btn bg-gradient-to-r from-secondary to-primary border-0 uppercase font-bold text-white "
+            >
               Get Started
-            </button>
+            </Link>
           </div>
         </div>
       </div>

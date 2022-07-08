@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import doctor from "../../../assets/images/doctor.png";
 import appointment from "../../../assets/images/appointment.png";
 const MakeAppointment = () => {
@@ -27,9 +28,12 @@ const MakeAppointment = () => {
             packages and web page
           </p>
           <div className="card-actions mt-[40px]">
-            <button className=" btn bg-gradient-to-r from-secondary to-primary border-0 uppercase font-bold text-white ">
+            <Link
+              to="/appointment"
+              className=" btn bg-gradient-to-r from-secondary to-primary border-0 uppercase font-bold text-white "
+            >
               Get Started
-            </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import chair from "../../../assets/images/chair.png";
 import "./Banner.css";
 const Banner = () => {
@@ -15,9 +16,12 @@ const Banner = () => {
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
             a id nisi.
           </p>
-          <button className=" btn bg-gradient-to-r from-secondary to-primary border-0 uppercase font-bold text-white ">
+          <Link
+            to="/appointment"
+            className=" btn bg-gradient-to-r from-secondary to-primary border-0 uppercase font-bold text-white "
+          >
             Get Started
-          </button>
+          </Link>
         </div>
       </div>
     </div>
